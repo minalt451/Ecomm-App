@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // SSH server name from Manage Jenkins → Configure → Publish over SSH
         SSH_SERVER = 'EC2-Production'
         REMOTE_DIR = '/var/www/ecomm'
     }
@@ -21,15 +20,15 @@ pipeline {
                         configName: env.SSH_SERVER,
                         transfers: [
                             sshTransfer(
-                                sourceFiles: '**/*',          // Copy all files and folders
-                                removePrefix: 'Ecomm-App',    // Remove the root folder prefix
+                                sourceFiles: '**/*',     // Copy all files and folders
+                                removePrefix: '',        // Leave empty to avoid prefix issues
                                 remoteDirectory: env.REMOTE_DIR,
                                 execCommand: '''
                                     cd /var/www/ecomm
                                     chmod +x deploy.sh
                                     ./deploy.sh
                                 ''',
-                                flatten: false                // Keep directory structure
+                                flatten: false           // Keep directory structure
                             )
                         ],
                         usePromotionTimestamp: false,
@@ -40,3 +39,4 @@ pipeline {
         }
     }
 }
+
