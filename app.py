@@ -1,7 +1,7 @@
 from flask import Flask, request, session, jsonify, render_template, redirect
 import mysql.connector
 
-app = Flask(__name__, template_folder='api')
+app = Flask(__name__, template_folder='templates')  # Fixed template folder
 app.secret_key = 'super_secret_key'
 
 DB_CONFIG = {
