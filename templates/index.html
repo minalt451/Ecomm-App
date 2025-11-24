@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ecomm App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Ecomm App</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/products">Products</a> |
+            <a href="/cart">Cart</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Featured Products</h2>
+        <p>Here is a sample product list. You can dynamically render products from your Flask app.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ecomm App</p>
+    </footer>
+</body>
+</html>
