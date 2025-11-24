@@ -1,19 +1,23 @@
 #!/bin/bash
 
-set -e
+# Navigate to app directory
+cd /var/www/ecomm || exit 1
 
-APP_DIR="/var/www/ecomm"
+# Activate virtual environment
+source venv/bin/activate
 
-echo "🔹 Creating virtual environment if not exists..."
-python3 -m venv $APP_DIR/venv
+# Install Python dependencies
+pip install --upgrade pip
+if [ -f requirements.txt ]; then
+    pip install -r requirements.txt
+fi
 
-echo "🔹 Activating environment..."
-source $APP_DIR/venv/bin/activate
-
-echo "🔹 Installing requirements..."
-pip install -r $APP_DIR/requirements.txt
-
-echo "🔹 Restarting Gunicorn service..."
+# Restart Gunicorn service
+sudo systemctl daemon-reload
 sudo systemctl restart ecomm
 
-echo "🚀 Deployment completed successfully!"
+# Reload Nginx to make sure it picks up changes
+sudo systemctl reload nginx
+
+echo "Deployment completed successfully."
+
